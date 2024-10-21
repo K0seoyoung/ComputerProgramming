@@ -20,7 +20,7 @@ public:
 
 // 생성자: 스택의 꼭대기를 가리키는 tos를 -1로 설정 (빈 스택을 나타냄)
 MyIntStack::MyIntStack() {
-	tos = -1; // 초기에는 스택이 비어 있음
+	tos = 0; // 초기에는 스택이 비어 있음
 }
 
 // push 함수: 스택에 정수 n을 푸시, 꽉 차면 false 반환
@@ -29,15 +29,17 @@ bool MyIntStack::push(int n) {
 		return false;
 	}
 	p[++tos] = n;  // tos를 증가시키고 그 위치에 n 저장
+	tos++;
 	return true;
 }
 
 // pop 함수: 스택에서 값을 팝하여 n에 저장, 비어 있으면 false 반환
 bool MyIntStack::pop(int &n) {
-	if (tos < 0) {  // 스택이 비어 있을 때
+	if (tos == 0) {  // 스택이 비어 있을 때
 		return false;
 	}
-	n = p[tos--];  // tos가 가리키는 값을 n에 저장하고 tos 감소
+	tos--;
+	n = p[tos];  // tos가 가리키는 값을 n에 저장하고 tos 감소
 	return true;
 }
 
